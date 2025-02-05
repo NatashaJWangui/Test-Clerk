@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+**Clerk Authentication Issues in ENIN**
 
-## Getting Started
+# Overview
 
-First, run the development server:
+We are currently facing issues with the Clerk authentication integration in the ENIN project. Despite configuring Clerk to handle authentication for the admin/ routes, the system is not functioning as expected. Users are unable to log in, session handling is failing, and API authentication is not working correctly.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Current Implementation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Frontend**:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+* Clerk is used for authentication on the admin/login route.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* After login, users should be redirected to admin/dashboard.
 
-## Learn More
+* ClerkProvider wraps only the admin/ routes for now. Located at app/admin/layout.js
 
-To learn more about Next.js, take a look at the following resources:
+**Backend:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Using @clerk/express for authentication middleware.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* API authentication relies on Clerk session tokens.
 
-## Deploy on Vercel
+# Issues Encountered
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Users Cannot Log In
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Login attempts fail without clear error messages.
+
+* Redirection after login does not work properly.
+
+* Session Handling Failing
+
+* Clerk is not maintaining active sessions.
+
+* Users get logged out unexpectedly or don’t stay authenticated across requests.
+
+* API Authentication Not Working
+
+* Backend fails to verify Clerk session tokens.
+
+* API routes requiring authentication reject valid Clerk-authenticated requests.
+
+* Publishable key not being noticed yet available in the .env file.
+
+* Page keeps redirecting to sign in in an endless loop.
+
+## Debugging Attempts
+
+* Verified Clerk credentials in .env.local and in .env in the backend route
+
+* Checked if ClerkProvider is correctly wrapping the admin/ routes.
+
+* Ensured backend requests include valid Clerk authentication headers.
+
+* Tested with both @clerk/express and @clerk/clerk-sdk-node which has depreciated.
+
+* Reviewed Clerk logs for errors.
+
+**Running the Project**
+
+To start the project, follow these steps:
+
+* Navigate to the frontend directory(test-clerk-app) and run:
+
+>>>>> npm run dev
+
+>>This should open the application at localhost:3000.
+
+* Navigate to the backend directory and run:
+
+>>> cd backend
+>>> npm start
+
+>> This should start the backend server at localhost:5000.
+
+**Next Steps**
+
+* Investigate if ClerkProvider is properly initializing in the Next.js frontend.
+
+* Debug Clerk middleware in Express backend to confirm session handling.
+
+* Check if Clerk’s authentication tokens are correctly passed and validated.
+
+* Consult Clerk documentation or reach out to support for further insights.Used the following documentation links for references :
+    * https://clerk.com/docs/quickstarts/nextjs >> Full stack :Next.js (App Router)
+    * https://clerk.com/docs/references/nextjs/clerk-middleware
+    * https://clerk.com/docs/quickstarts/express ?? Backend
+    * https://clerk.com/docs/quickstarts/nextjs >> Quick start Next.js
+
+**Notes**
+
+If you have any insights or potential fixes, feel free to contribute or suggest solutions!
+
