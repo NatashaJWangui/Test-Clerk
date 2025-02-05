@@ -1,4 +1,4 @@
-**Clerk Authentication Issues in ENIN**
+**Clerk Authentication Issues in Clerk Test App**
 
 # Overview
 
