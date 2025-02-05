@@ -2,7 +2,7 @@
 
 # Overview
 
-We are currently facing issues with the Clerk authentication integration in the ENIN project. Despite configuring Clerk to handle authentication for the admin/ routes, the system is not functioning as expected. Users are unable to log in, session handling is failing, and API authentication is not working correctly.
+We are currently facing issues with the Clerk authentication integration in the Test Clerk project. Despite configuring Clerk to handle authentication for the admin/ routes, the system is not functioning as expected. Users are unable to log in, session handling is failing, and API authentication is not working correctly.
 
 ## Current Implementation
 
