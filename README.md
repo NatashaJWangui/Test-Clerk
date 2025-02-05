@@ -84,7 +84,7 @@ To start the project, follow these steps:
 * Consult Clerk documentation or reach out to support for further insights.Used the following documentation links for references :
     * https://clerk.com/docs/quickstarts/nextjs >> Full stack :Next.js (App Router)
     * https://clerk.com/docs/references/nextjs/clerk-middleware
-    * https://clerk.com/docs/quickstarts/express ?? Backend
+    * https://clerk.com/docs/quickstarts/express >> Backend
     * https://clerk.com/docs/quickstarts/nextjs >> Quick start Next.js
 
 **Notes**
